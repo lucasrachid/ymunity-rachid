@@ -42,6 +42,7 @@ export class ListComponent implements OnInit {
     this.pacienteService.buscarPacientes().subscribe({
       next: (response: Paciente[]) => {
         this.pacientes.set(response);
+        console.log(this.pacientes());
         this.carregando.set(false);
       },
       error: (error: any) => {

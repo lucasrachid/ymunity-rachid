@@ -1,21 +1,60 @@
-<p-table [value]="customers" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+<p-table [value]="pacientes()" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
   [tableStyle]="{ 'min-width': '50rem' }"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [rowsPerPageOptions]="[5, 10, 20]">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width:25%">Name</th>
-      <th style="width:25%">Country</th>
-      <th style="width:25%">Company</th>
-      <th style="width:25%">Representative</th>
+      <th pSortableColumn="nome">
+        <div class="flex center">
+          <span>Paciente</span>
+          <p-sortIcon field="nome"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="isAtivo">
+        <div class="flex center">
+          <span>Status</span>
+          <p-sortIcon field="isAtivo"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="diagnostico">
+        <div class="flex center">
+          <span>Diagnóstico</span>
+          <p-sortIcon field="diagnostico"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="medicamento">
+        <div class="flex center">
+          <span>Medicamento</span>
+          <p-sortIcon field="medicamento"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="planoDeSaude">
+        <div class="flex center">
+          <span>Plano de Saúde</span>
+          <p-sortIcon field="planoDeSaude"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="ultimaSolicitacao">
+        <div class="flex center">
+          <span>Última Solicitação</span>
+          <p-sortIcon field="ultimaSolicitacao"></p-sortIcon>
+        </div>
+      </th>
+      <th>
+
+      </th>
+
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-customer>
+  <ng-template pTemplate="body" let-pacientes>
     <tr>
-      <td>{{ customer.name }}</td>
-      <td>{{ customer.country.name }}</td>
-      <td>{{ customer.company }}</td>
-      <td>{{ customer.representative.name }}</td>
+      <td>{{ pacientes.nome }}</td>
+      <td>{{ pacientes.isAtivo }}</td>
+      <td>{{ pacientes.diagnostico }}</td>
+      <td>{{ pacientes.medicamento }}</td>
+      <td>{{ pacientes.planoDeSaude }}</td>
+      <td>{{ pacientes.ultimaSolicitacao }}</td>
+      <td>{{ pacientes.nome }}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft">
