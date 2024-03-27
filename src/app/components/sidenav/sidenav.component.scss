@@ -1,0 +1,35 @@
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 200px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.menu-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sidenav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidenav li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidenav li a {
+  text-decoration: none;
+  color: #333;
+}
