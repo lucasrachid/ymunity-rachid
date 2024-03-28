@@ -9,7 +9,7 @@ import { LoaderComponent } from '../../../components/loader/loader.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-list',
@@ -23,7 +23,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ReactiveFormsModule,
     FormsModule,
     InputTextModule,
-    DropdownModule
+    DropdownModule,
+    MenuModule
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
@@ -40,6 +41,18 @@ export class ListComponent implements OnInit {
     { name: 'Pacientes Inativos', code: 'inativos' },
   ]);
   selectedFilter = signal(this.filters()[0]);
+  items = signal([
+    {
+      label: 'Ativo',
+      icon: '',
+    },
+    {
+      label: 'Inativo',
+      icon: ''
+    }
+  ]);
+  atualizaStatusOption = signal(false);
+  pacienteAtual = signal({} as Paciente);
 
   constructor(
     private readonly pacienteService: PacienteService
@@ -83,6 +96,15 @@ export class ListComponent implements OnInit {
     }
 
     this.filteredPacientes.set(pacientes.filter(paciente => !paciente.isAtivo));
+  }
+
+  alterarValorStatusOption(paciente: Paciente): void {
+    this.pacienteAtual.set(paciente);
+    this.atualizaStatusOption.set(!this.atualizaStatusOption())
+  }
+
+  resetPacienteAtual(): void {
+    this.pacienteAtual.set({} as Paciente);
   }
 
 }

@@ -3,7 +3,7 @@
     <div class="card flex flex-wrap justify-content-center gap-3">
       <span class="p-input-icon-right">
         <i class="pi pi-search"></i>
-        <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Pesquisar" (change)="filterList()"/>
+        <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Pesquisar" (keyup)="filterList()"/>
       </span>
     </div>
     <div>
@@ -105,9 +105,12 @@
                 <img src="assets/icon/table-cell.png" class="mr-2" width="24" height="24" pTooltip="Nova solicitação"
                   tooltipPosition="bottom">
               </span>
-              <span>
+              <span (click)="alterarValorStatusOption(pacientes)">
                 <i class="pi pi-ellipsis-h" pTooltip="Atualizar status" tooltipPosition="left">
                 </i>
+              </span>
+              <span *ngIf="pacienteAtual().id == pacientes.id">
+                <p-menu #menu [model]="items()"></p-menu>
               </span>
             </div>
           </td>
