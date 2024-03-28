@@ -1,66 +1,122 @@
-<p-table [value]="pacientes()" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
-  [tableStyle]="{ 'min-width': '50rem' }"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [rowsPerPageOptions]="[5, 10, 20]">
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="nome">
-        <div class="flex center">
-          <span>Paciente</span>
-          <p-sortIcon field="nome"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="isAtivo">
-        <div class="flex center">
-          <span>Status</span>
-          <p-sortIcon field="isAtivo"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="diagnostico">
-        <div class="flex center">
-          <span>Diagnóstico</span>
-          <p-sortIcon field="diagnostico"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="medicamento">
-        <div class="flex center">
-          <span>Medicamento</span>
-          <p-sortIcon field="medicamento"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="planoDeSaude">
-        <div class="flex center">
-          <span>Plano de Saúde</span>
-          <p-sortIcon field="planoDeSaude"></p-sortIcon>
-        </div>
-      </th>
-      <th pSortableColumn="ultimaSolicitacao">
-        <div class="flex center">
-          <span>Última Solicitação</span>
-          <p-sortIcon field="ultimaSolicitacao"></p-sortIcon>
-        </div>
-      </th>
-      <th>
+@if (!carregando()) {
+  <div class="flex justify-between w-100 items-center py-6">
+    <div class="card flex flex-wrap justify-content-center gap-3">
+      <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Pesquisar" (change)="filterList()"/>
+      </span>
+    </div>
+    <div>
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="filters()"
+          (onChange)="filterList()"
+          [(ngModel)]="selectedFilter"
+          placeholder="Filtros"
+          optionLabel="name"
+          inputId="float-label"
+          class="w-[200px]"></p-dropdown>
+        <label for="float-label">Filtros</label>
+      </span>
+    </div>
+  </div>
+  <div>
+    <p-table [value]="filteredPacientes()" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+      [tableStyle]="{ 'min-width': '68rem' }"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10, 20]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nome">
+            <div class="flex center w-56">
+              <span>Paciente</span>
+              <p-sortIcon field="nome"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="isAtivo">
+            <div class="flex center">
+              <span>Status</span>
+              <p-sortIcon field="isAtivo"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="diagnostico">
+            <div class="flex center">
+              <span>Diagnóstico</span>
+              <p-sortIcon field="diagnostico"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="medicamento">
+            <div class="flex center">
+              <span>Medicamento</span>
+              <p-sortIcon field="medicamento"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="planoDeSaude">
+            <div class="flex center">
+              <span>Plano de Saúde</span>
+              <p-sortIcon field="planoDeSaude"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="ultimaSolicitacao">
+            <div class="flex center">
+              <span>Última Solicitação</span>
+              <p-sortIcon field="ultimaSolicitacao"></p-sortIcon>
+            </div>
+          </th>
+          <th>
+          </th>
 
-      </th>
-
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-pacientes>
-    <tr>
-      <td>{{ pacientes.nome }}</td>
-      <td>{{ pacientes.isAtivo }}</td>
-      <td>{{ pacientes.diagnostico }}</td>
-      <td>{{ pacientes.medicamento }}</td>
-      <td>{{ pacientes.planoDeSaude }}</td>
-      <td>{{ pacientes.ultimaSolicitacao }}</td>
-      <td>{{ pacientes.nome }}</td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="paginatorleft">
-    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-  </ng-template>
-  <ng-template pTemplate="paginatorright">
-    <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-  </ng-template>
-</p-table>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pacientes>
+        <tr>
+          <td>
+            <div class="ellipsis paciente">
+              {{ pacientes.nome }}
+            </div>
+          </td>
+          <td>
+            <div class="ellipsis status {{ pacientes.isAtivo ? 'ativo' : 'inativo' }}">
+              {{ pacientes.isAtivo ? 'Ativo' : 'Inativo' }}
+            </div>
+          </td>
+          <td>
+            <div class="ellipsis diagnostico">
+              {{ pacientes.diagnostico || '-' }}
+            </div>
+          </td>
+          <td>
+            <div class="ellipsis medicamento">
+              {{ pacientes.medicamento || '-' }}
+            </div>
+          </td>
+          <td>
+            <div class="ellipsis plano-de-saude">
+              {{ pacientes.planoDeSaude || '-' }}
+            </div>
+          </td>
+          <td>
+            <div class="ellipsis ultima-solicitacao">
+              {{ pacientes.ultimaSolicitacao | date:'dd/MM/yyyy' || '-' }}
+            </div>
+          </td>
+          <td>
+            <div class="flex justify-between options">
+              <span>
+                <img src="assets/icon/table-cell.png" class="mr-2" width="24" height="24" pTooltip="Nova solicitação"
+                  tooltipPosition="bottom">
+              </span>
+              <span>
+                <i class="pi pi-ellipsis-h" pTooltip="Atualizar status" tooltipPosition="left">
+                </i>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+} @else {
+  <div class="flex justify-center items-center h-[80vh]">
+    <app-loader></app-loader>
+  </div>
+}

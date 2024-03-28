@@ -16,8 +16,6 @@ export class PacienteService {
   ) { }
 
   buscarPacientes(): Observable<Paciente[]> {
-    setInterval(() => {
-    }, 2000);
     return this.http.get<Paciente[]>(`${this.apiUrl}/pacientes.json`);
   }
 }

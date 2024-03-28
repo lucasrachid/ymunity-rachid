@@ -1,5 +1,14 @@
-<div class="flex justify-between w-100">
-  <h1>Pacientes</h1>
-  <h1>Cadastrar pacientes</h1>
+<div class="w-[83vw]">
+  <div class="flex justify-between w-100 items-center">
+    <h1>Pacientes</h1>
+    <div>
+      <p-button label="Cadastrar Paciente" icon="pi pi-plus" (click)="showModal()">
+      </p-button>
+      <p-dialog header="Header" [(visible)]="visible" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+        <app-cadastro></app-cadastro>
+      </p-dialog>
+    </div>
+  </div>
+  <app-list></app-list>
+
 </div>
-<app-list></app-list>

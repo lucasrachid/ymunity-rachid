@@ -1,3 +1,80 @@
 .center {
   align-items: center !important;
 }
+
+.options {
+  align-items: center;
+  justify-content: space-between;
+  width: 5.125rem;
+
+  i {
+    color: #797ef5;
+  }
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+
+  &.paciente {
+    width: 13.375rem;
+    color: #5B5F82;
+    font-weight: 700;
+    font-size: 0.8125rem;
+  }
+
+  &.status {
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 12px;
+    width: 65px;
+    padding: 6px 16px;
+    cursor: default;
+
+    &.ativo {
+      background: #CAF1D8;
+      color: #22C55E;
+    }
+
+    &.inativo {
+      background: #FFD0CE;
+      color: #D9342B;
+    }
+  }
+
+  &.diagnostico {
+    width: 10.9375rem;
+  }
+
+  &.medicamento {
+    width: 8.1875rem;
+  }
+
+  &.plano-de-saude {
+    width: 12.75rem;
+  }
+
+  &.ultima-solicitacao {
+    width: 12.125rem;
+  }
+}
+
+
+td {
+  height: 3rem;
+  padding: 16px, 12px, 16px, 12px !important;
+}
+
+th {
+  background-color: #E0E9F8;
+  height: 2rem;
+}
