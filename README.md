@@ -46,3 +46,5 @@ Como está utilizando a versão 17 do Angular, precisará ter o node atualizado.
 - O Hover nos números da paginação, ainda não foram feitos.
 
 - Não foi desenvolvida a sidenave.
+
+- Criação de testes unitários.
